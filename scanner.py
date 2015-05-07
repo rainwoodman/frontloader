@@ -3,6 +3,7 @@ from glob import glob
 import os.path
 import fitsio
 import json
+from frontloader import Instrument
 
 ap = ArgumentParser()
 ap.add_argument("prefix", help="Location to scan the image files")
@@ -11,36 +12,40 @@ ap.add_argument("output", help="Location to store the database")
 ns = ap.parse_args()
 
 def scan(filename):
+    """ BOK file scanner -- extract meta data from files """
     f = fitsio.FITS(filename)
     header = f[0].read_header()
-    objecttype = header['OBJECT'].strip().lower()
+    OBJECT = header['OBJECT'].strip().lower()
 
     d = dict(
-        RAWFILENAME=os.path.basename(filename),
-        OBJECTYPE=objecttype,
+        PK=os.path.basename(filename),
+        RELFILENAME=os.path.relpath(filename, ns.prefix),
+        OBJECT=OBJECT,
         UTC_OBS=header['UTC-OBS']
     )
 
-    if objecttype == "zero":
+    if OBJECT == "zero":
         pass
-    elif objecttype == "flat":
+    elif OBJECT == "flat":
         pass
     else:
         d['RA'] = header['RA']
         d['DEC'] = header['DEC']
-    print d
+        d['OBJECT'] = 'object'
     return d
+
 def main():
-    filenames = list(glob(os.path.join(ns.prefix, '*/*.fits.gz')))
+    filenames = sorted(list(glob(os.path.join(ns.prefix, '*/*.fits.gz'))))
     db = []
     for filename in filenames:
         db.append(scan(filename))
-    if ns.output == '-':
-        ff = stdout
-    else:
-        ff = file(ns.output, 'w')
+
+    ff = file(ns.output, 'w')
     with ff:
         json.dump(db, ff)
+    
+    instr = Instrument(ns.prefix, ns.output)
+    print instr.open(instr.metadata.keys()[0])
 
 if __name__ == "__main__":
     main()
