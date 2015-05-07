@@ -138,7 +138,7 @@ class Stitch(Operation):
         ccd.buffer[amp.ref.ccdsec] = amp.buffer[amp.ref.datasec]
         ccd.invvar[amp.ref.ccdsec] = amp.invvar[amp.ref.datasec]
 
-class Copy(Operation):
+class Mock(Operation):
     def visit_amp(self, amp):
         amp.buffer[:] = amp.ref.data 
         amp.invvar[:] = (amp.ref.data * 1.0) ** -0.5
