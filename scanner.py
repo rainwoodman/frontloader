@@ -44,8 +44,6 @@ def main():
     with ff:
         json.dump(db, ff)
     
-    instr = Instrument(ns.prefix, ns.output)
-    print instr.open(instr.metadata.keys()[0])
 
 if __name__ == "__main__":
     main()
