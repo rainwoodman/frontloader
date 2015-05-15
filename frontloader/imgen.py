@@ -26,7 +26,7 @@ class ImgenCCD(ImgenNode):
     def __init__(self, ref):
         assert isinstance(ref, CCD)
         self.amps = {}
-        for i, amp in enumerate(ref.amps):
+        for i, amp in enumerate(ref):
             self.amps[i] = ImgenAmp(amp)
 
         super(ImgenCCD, self).__init__(ref)
@@ -50,8 +50,8 @@ class ImgenExposure(ImgenNode):
         assert isinstance(ref, Exposure)
         super(ImgenExposure, self).__init__(ref)
         self.ccds = {}
-        for ccd in ref.ccds:
-            self.ccds[ccd] = ImgenCCD(ref.ccds[ccd])
+        for ccd in ref:
+            self.ccds[ccd] = ImgenCCD(ref[ccd])
 
     def __getitem__(self, key):
         return self.ccds[key]

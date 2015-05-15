@@ -21,8 +21,8 @@ class Repository(TinyDB):
     def open(self, key):
         [m] = self.search(where("PK")==key)
         filename = os.path.join(self.prefix, m['PATH'])
-        fits = FITS(filename)
-        return Exposure(fits, m)
+        exposure = Exposure(m, filename)
+        return exposure
 
     def __getitem__(self, index):
         """ Do not use this frequently. It is slow as horror. """
