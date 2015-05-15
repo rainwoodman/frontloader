@@ -1,6 +1,6 @@
 import os.path
 import fitsio
-import json
+import tinydb
 import numpy
 
 def parse_fits_range(fits_range, to_python=False):
@@ -14,6 +14,19 @@ def parse_fits_range(fits_range, to_python=False):
         return (slice(x[0] - 1, x[1] + stepx - 1, stepx),
                 slice(y[0] - 1, y[1] + stepy - 1, stepy))
     return x, y
+
+from tinydb.storages import JSONStorage
+from tinydb.middlewares import CachingMiddleware
+
+class Metadata(tinydb.TinyDB):
+    """ An interface to the metadata database created by scanner 
+        
+        The idea is to support queries for a time range etc. 
+    """
+    def __init__(self, filename):
+        tinydb.TinyDB.__init__(self, filename, storage=CachingMiddleware(JSONStorage))
+    def __getitem__(self, key):
+        return self.search(tinydb.where(PK==key))
 
 class Reduced(object):
     """ A deep 'copy' of the exposure. 
@@ -140,20 +153,17 @@ class Stitch(Operation):
 
 class Mock(Operation):
     def visit_amp(self, amp):
-        amp.buffer[:] = amp.ref.data 
+        amp.buffer[:] = 1.0 * amp.ref.data / numpy.median(amp.ref.data)
         amp.invvar[:] = (amp.ref.data * 1.0) ** -0.5
 
 class Instrument(object):
-    def __init__(self, prefix, metadatafile):
-        with file(metadatafile, 'r') as ff:
-            metadata = json.load(ff)
-        self.metadata = dict(
-            [(item['PK'], item) for item in metadata])
+    def __init__(self, prefix, metadata):
+        self.metadata = metadata
         self.prefix = prefix
 
     def open(self, key):
         m = self.metadata[key]
-        filename = m['RELFILENAME']
+        filename = m['PATH']
 
         fits = fitsio.FITS(
             os.path.join(self.prefix, filename)

@@ -1,9 +1,14 @@
+#TODO:
+# convert RA/DEC 00:00:00(sexagesimal) to 00.00 (decimal)
+# EXPTIME DATE-POBS FILTER
+# FLAVOR
+# SCAN DECAM data
+
 from argparse import ArgumentParser
 from glob import glob
 import os.path
 import fitsio
-import json
-from frontloader import Instrument
+from frontloader import Metadata
 
 ap = ArgumentParser()
 ap.add_argument("prefix", help="Location to scan the image files")
@@ -19,9 +24,9 @@ def scan(filename):
 
     d = dict(
         PK=os.path.basename(filename),
-        RELFILENAME=os.path.relpath(filename, ns.prefix),
-        OBJECT=OBJECT,
-        UTC_OBS=header['UTC-OBS']
+        PATH=os.path.relpath(filename, ns.prefix),
+        FLAVOR=OBJECT,
+        DATE_OBS=header['DATE-OBS'] + 'T' + header['UTC-OBS'],
     )
 
     if OBJECT == "zero":
@@ -36,14 +41,12 @@ def scan(filename):
 
 def main():
     filenames = sorted(list(glob(os.path.join(ns.prefix, '*/*.fits.gz'))))
-    db = []
-    for filename in filenames:
-        db.append(scan(filename))
+    with Metadata(ns.output) as db:
 
-    ff = file(ns.output, 'w')
-    with ff:
-        json.dump(db, ff)
-    
+        for filename in filenames:
+            d = scan(filename)
+            db.insert(d)
+
 
 if __name__ == "__main__":
     main()
