@@ -11,7 +11,7 @@ PK = repo.get(repo.where("OBJECT") == "object")['PK']
 expo = repo.open(PK)
 img = pipe.reduce(expo)
 
-print img.ccds['CCD1'].invvar
-print img.ccds['CCD1'].buffer
-imshow(img.ccds['CCD1'].buffer)
+print img['CCD1'].invvar
+print img['CCD1'].buffer
+imshow(img['CCD1'].buffer)
 
