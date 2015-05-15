@@ -8,7 +8,7 @@ from argparse import ArgumentParser
 from glob import glob
 import os.path
 import fitsio
-from frontloader import Metadata
+from frontloader import Repository
 
 ap = ArgumentParser()
 ap.add_argument("prefix", help="Location to scan the image files")
@@ -41,10 +41,11 @@ def scan(filename):
 
 def main():
     filenames = sorted(list(glob(os.path.join(ns.prefix, '*/*.fits.gz'))))
-    with Metadata(ns.output) as db:
+    with Repository(ns.prefix, ns.output) as db:
 
         for filename in filenames:
             d = scan(filename)
+            db.remove(Repository.where("PK") == d["PK"])
             db.insert(d)
 
 

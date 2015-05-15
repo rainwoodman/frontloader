@@ -1,11 +1,17 @@
-from frontloader import Instrument
+from frontloader import Repository
 from frontloader import Pipeline
-from frontloader import Operation
-from frontloader import Stitch, Mock
+from frontloader.transforms.essential import Stitch, Mock
 
-instr = Instrument('testdata/bok', 'testdata/bok.json')
-pipe = Pipeline(instr, [
+repo= Repository('testdata/bok', 'testdata/bok.json')
+pipe = Pipeline([
         Mock(),
         Stitch()])
 
-r = pipe.reduce(instr.metadata.keys()[0])
+PK = repo.search(repo.where("OBJECT") == "object")[0]['PK']
+expo = repo.open(PK)
+img = pipe.reduce(expo)
+
+print img.ccds['CCD1'].invvar
+print img.ccds['CCD1'].buffer
+imshow(img.ccds['CCD1'].buffer)
+
