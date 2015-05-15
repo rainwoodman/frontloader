@@ -1,6 +1,7 @@
 from ..utils import parse_fits_range
 from fitsio import FITS
 from ..nodes import CCD, Amp
+
 def parse_hdus(exposure):
     fits = FITS(exposure.filename)
     for i in range(1, len(fits)):
