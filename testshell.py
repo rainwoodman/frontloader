@@ -7,7 +7,7 @@ pipe = Pipeline([
         Mock(),
         Stitch()])
 
-PK = repo.search(repo.where("OBJECT") == "object")[0]['PK']
+PK = repo.get(repo.where("OBJECT") == "object")['PK']
 expo = repo.open(PK)
 img = pipe.reduce(expo)
 

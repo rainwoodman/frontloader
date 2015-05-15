@@ -2,25 +2,9 @@ import numpy
 from .nodes import Exposure, Amp, CCD
 __all__ = ['Pipeline', 'Transform']
 
-class Image(object):
-    """ A deep 'copy' of the exposure. 
-
-        binds reduced data to each Amp and CCD
-    """
+class ImgenNode(object):
     def __init__(self, ref):
         self.ref = ref
-        if isinstance(ref, Exposure):
-            self.ccds = {}
-            for ccd in ref.ccds:
-                self.ccds[ccd] = Image(ref.ccds[ccd])
-        else:
-            if isinstance(ref, Amp):
-                self.shape = ref.data.shape
-            elif isinstance(ref, CCD):
-                self. shape = ref.size
-                self.amps = [Image(amp) for amp in ref.amps]
-            else:
-                raise TypeError
 
     def allocate(self):
         self.buffer = numpy.empty(self.shape, 'f4')
@@ -30,12 +14,58 @@ class Image(object):
         del self.buffer
         del self.invvar
 
+class ImgenAmp(ImgenNode):
+    def __init__(self, ref):
+        assert isinstance(ref, Amp)
+        super(ImgenAmp, self).__init__(ref)
+    @property
+    def shape(self):
+        return self.ref.data.shape
+
+class ImgenCCD(ImgenNode):
+    def __init__(self, ref):
+        assert isinstance(ref, CCD)
+        self.amps = {}
+        for i, amp in enumerate(ref.amps):
+            self.amps[i] = ImgenAmp(amp)
+
+        super(ImgenCCD, self).__init__(ref)
+    @property
+    def shape(self):
+        return self.ref.size
+
+    def __getitem__(self, key):
+        return self.amps[key]
+    def __iter__(self):
+        return iter(self.amps)
+    def __contains__(self, key):
+        return key in self.amps
+
+class ImgenExposure(ImgenNode):
+    """ A deep 'copy' of the exposure. 
+
+        binds reduced data to each Amp and CCD
+    """
+    def __init__(self, ref):
+        assert isinstance(ref, Exposure)
+        super(ImgenExposure, self).__init__(ref)
+        self.ccds = {}
+        for ccd in ref.ccds:
+            self.ccds[ccd] = ImgenCCD(ref.ccds[ccd])
+
+    def __getitem__(self, key):
+        return self.ccds[key]
+    def __iter__(self):
+        return iter(self.ccds)
+    def __contains__(self, key):
+        return key in self.ccds
+
 class Pipeline(object):
     def __init__(self, transforms):
         self.transforms = transforms
 
     def reduce(self, exposure):
-        r = Image(exposure)
+        r = ImgenExposure(exposure)
         for op in self.transforms:
             op.visit_exposure(r)
         return r
@@ -45,16 +75,16 @@ class Transform(object):
         pass
 
     def visit_exposure(self, expo):
-        assert isinstance(expo.ref, Exposure)
-        for ccd in expo.ccds:
-            self.visit_ccd(expo.ccds[ccd])
+        assert isinstance(expo, ImgenExposure)
+        for ccd in expo:
+            self.visit_ccd(expo[ccd])
             
     def visit_ccd(self, ccd):
-        assert isinstance(ccd.ref, CCD)
-        for amp in ccd.amps:
-            self.visit_amp(amp)
+        assert isinstance(ccd, ImgenCCD)
+        for amp in ccd:
+            self.visit_amp(ccd[amp])
 
     def visit_amp(self, amp):
-        assert isinstance(amp.ref, Amp)
+        assert isinstance(amp, ImgenAmp)
         pass
 
