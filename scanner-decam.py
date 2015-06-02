@@ -17,30 +17,33 @@ ap.add_argument("output", help="Location to store the database")
 ns = ap.parse_args()
 
 def scan(filename):
-    """ BOK file scanner -- extract meta data from files """
+    """ DECAM file scanner -- extract meta data from files """
     f = fitsio.FITS(filename)
     header = f[0].read_header()
-    OBJECT = header['OBJECT'].strip().lower()
+    try:
+        OBJECT = header['OBJECT'].strip().lower()
 
-    d = dict(
-        PK=os.path.basename(filename),
-        PATH=os.path.relpath(filename, ns.prefix),
-        FLAVOR=OBJECT,
-        DATE_OBS=header['DATE-OBS'] + 'T' + header['UTC-OBS'],
-    )
-
-    if OBJECT == "zero":
-        pass
-    elif OBJECT == "flat":
-        pass
-    else:
-        d['RA'] = header['RA']
-        d['DEC'] = header['DEC']
-        d['FLAVOR'] = 'object'
-    return d
+        d = dict(
+            PK=os.path.basename(filename),
+            PATH=os.path.relpath(filename, ns.prefix),
+            DATE_OBS=header['DATE-OBS'],
+        )
+        if OBJECT in ['domeflat-u40']:
+            d['FLAVOR'] = 'flat'
+        elif OBJECT in ['postnight-bias']:
+            d['FLAVOR'] = 'zero'
+        else:
+            d['RA'] = header['RA']
+            d['DEC'] = header['DEC']
+            d['FLAVOR'] = 'object'
+        return d
+    except ValueError as e:
+        print e
+        print sorted(header.keys())
+        raise
 
 def main():
-    filenames = sorted(list(glob(os.path.join(ns.prefix, '*/*.fits.gz'))))
+    filenames = sorted(list(glob(os.path.join(ns.prefix, '*/*.fits.fz'))))
     with Repository(ns.prefix, ns.output) as db:
 
         for filename in filenames:

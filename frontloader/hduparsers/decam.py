@@ -7,7 +7,6 @@ def parse_hdus(exposure):
     for i in range(1, len(fits)):
         hdu = fits[i]
         header = hdu.read_header()
-        #print header
         ccdname = "CCD%02d" % int(header['CCDNUM'])
         if ccdname not in exposure:
             ccdsize = parse_fits_range(header['CCDSEC'])

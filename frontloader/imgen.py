@@ -64,10 +64,19 @@ class Pipeline(object):
     def __init__(self, transforms):
         self.transforms = transforms
 
-    def reduce(self, exposure):
-        r = ImgenExposure(exposure)
-        for op in self.transforms:
-            op.visit_exposure(r)
+    def reduce(self, node):
+        if isinstance(node, Exposure):
+            r = ImgenExposure(node)
+            for op in self.transforms:
+                op.visit_exposure(r)
+        if isinstance(node, CCD):
+            r = ImgenCCD(node)
+            for op in self.transforms:
+                op.visit_ccd(r)
+        if isinstance(node, Amp):
+            r = ImgenAmp(node)
+            for op in self.transforms:
+                op.visit_amp(r)
         return r
 
 class Transform(object):
