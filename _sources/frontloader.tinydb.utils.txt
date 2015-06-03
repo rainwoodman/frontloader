@@ -1,0 +1,7 @@
+frontloader.tinydb.utils module
+===============================
+
+.. automodule:: frontloader.tinydb.utils
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -1,0 +1,7 @@
+frontloader.tinydb.npindex module
+=================================
+
+.. automodule:: frontloader.tinydb.npindex
+    :members:
+    :undoc-members:
+    :show-inheritance:

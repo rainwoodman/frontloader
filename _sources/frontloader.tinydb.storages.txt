@@ -1,0 +1,7 @@
+frontloader.tinydb.storages module
+==================================
+
+.. automodule:: frontloader.tinydb.storages
+    :members:
+    :undoc-members:
+    :show-inheritance:

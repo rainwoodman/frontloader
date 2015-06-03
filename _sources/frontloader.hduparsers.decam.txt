@@ -1,0 +1,7 @@
+frontloader.hduparsers.decam module
+===================================
+
+.. automodule:: frontloader.hduparsers.decam
+    :members:
+    :undoc-members:
+    :show-inheritance:

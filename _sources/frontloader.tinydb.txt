@@ -1,0 +1,24 @@
+frontloader.tinydb package
+==========================
+
+.. automodule:: frontloader.tinydb
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+
+   frontloader.tinydb.database
+   frontloader.tinydb.index
+   frontloader.tinydb.middlewares
+   frontloader.tinydb.migrate
+   frontloader.tinydb.npindex
+   frontloader.tinydb.operations
+   frontloader.tinydb.queries
+   frontloader.tinydb.serialize
+   frontloader.tinydb.storages
+   frontloader.tinydb.utils
+

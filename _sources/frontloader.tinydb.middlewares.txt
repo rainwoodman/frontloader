@@ -1,0 +1,7 @@
+frontloader.tinydb.middlewares module
+=====================================
+
+.. automodule:: frontloader.tinydb.middlewares
+    :members:
+    :undoc-members:
+    :show-inheritance:

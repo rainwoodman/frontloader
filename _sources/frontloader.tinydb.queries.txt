@@ -1,0 +1,7 @@
+frontloader.tinydb.queries module
+=================================
+
+.. automodule:: frontloader.tinydb.queries
+    :members:
+    :undoc-members:
+    :show-inheritance:

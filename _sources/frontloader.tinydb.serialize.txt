@@ -1,0 +1,7 @@
+frontloader.tinydb.serialize module
+===================================
+
+.. automodule:: frontloader.tinydb.serialize
+    :members:
+    :undoc-members:
+    :show-inheritance:

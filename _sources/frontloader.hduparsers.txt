@@ -1,0 +1,16 @@
+frontloader.hduparsers package
+==============================
+
+.. automodule:: frontloader.hduparsers
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+
+   frontloader.hduparsers.bok
+   frontloader.hduparsers.decam
+

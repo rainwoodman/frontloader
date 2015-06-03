@@ -1,0 +1,27 @@
+frontloader package
+===================
+
+.. automodule:: frontloader
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    frontloader.hduparsers
+    frontloader.tinydb
+    frontloader.transforms
+
+Submodules
+----------
+
+.. toctree::
+
+   frontloader.imgen
+   frontloader.nodes
+   frontloader.repo
+   frontloader.utils
+

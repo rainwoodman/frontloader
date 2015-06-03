@@ -1,0 +1,7 @@
+frontloader.repo module
+=======================
+
+.. automodule:: frontloader.repo
+    :members:
+    :undoc-members:
+    :show-inheritance:

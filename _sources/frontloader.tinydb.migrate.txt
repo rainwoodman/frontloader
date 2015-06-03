@@ -1,0 +1,7 @@
+frontloader.tinydb.migrate module
+=================================
+
+.. automodule:: frontloader.tinydb.migrate
+    :members:
+    :undoc-members:
+    :show-inheritance:
