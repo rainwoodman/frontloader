@@ -8,6 +8,9 @@ from argparse import ArgumentParser
 from glob import glob
 import os.path
 import fitsio
+
+# easy_install --user sharedmem
+import sharedmem
 from frontloader import Repository
 
 ap = ArgumentParser()
@@ -56,24 +59,31 @@ def main():
     repo = Repository(ns.prefix, ns.output)
     PKindex = repo.create_index('PK')
 
-    for filename in filenames:
-        PK = os.path.basename(filename)
-        print filename, PK,
-        if PKindex.contains(PK):
-            print 'exists'
-            if ns.update:
-                update = True
+    with sharedmem.MapReduce() as pool:
+        def work(filename):
+            PK = os.path.basename(filename)
+            if PKindex.contains(PK):
+                if ns.update:
+                    update = True
+                else:
+                    return None, None
             else:
-                continue
-        else:
-            update = False
-        d = scan(filename)
-        if update:
-            repo.update(d, eids=PKindex.get_eids([PK]))
-        else:
-            repo.insert(d)
-        repo._storage.flush()
-        print d
+                update = False
+            d = scan(filename)
+            return d, update
+
+        def reduce(d, update):
+            if d is None: return
+            PK = d['PK']
+            if update:
+                repo.update(d, eids=PKindex.get_eids([PK]))
+                print PK, 'exists', 'updating', d
+            else:
+                print PK, 'inserting', d
+                repo.insert(d)
+            repo._storage.flush()
+
+        pool.map(work, filenames, reduce=reduce)
 
 if __name__ == "__main__":
     main()
