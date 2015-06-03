@@ -23,4 +23,12 @@ class Index(object):
         ind = self.sorted.searchsorted(value)
         ind = numpy.clip(ind, 0, len(self.sorted) - 1)
         return self.sorted[ind] == value
+    
+    def get(self, value):
+        ind = self.sorted.searchsorted(value)
+        return [self.table.get(eid) for eid in self.eids[ind]]
 
+    def get_eids(self, value):
+        ind = self.sorted.searchsorted(value)
+        return self.eids[ind]
+        
