@@ -25,6 +25,9 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="FrontLoader 0.1 documentation" href="index.html" />
+    <link rel="up" title="frontloader package" href="frontloader.html" />
+    <link rel="next" title="frontloader.repo module" href="frontloader.repo.html" />
+    <link rel="prev" title="frontloader.imgen module" href="frontloader.imgen.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -37,7 +40,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="index.html">FrontLoader 0.1 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="frontloader.repo.html" title="frontloader.repo module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="frontloader.imgen.html" title="frontloader.imgen module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">FrontLoader 0.1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >API Reference</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="frontloader.html" accesskey="U">frontloader package</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -46,8 +60,33 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="frontloader-nodes-module">
-<h1>frontloader.nodes module<a class="headerlink" href="#frontloader-nodes-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-frontloader.nodes">
+<span id="frontloader-nodes-module"></span><h1>frontloader.nodes module<a class="headerlink" href="#module-frontloader.nodes" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="frontloader.nodes.Amp">
+<em class="property">class </em><code class="descclassname">frontloader.nodes.</code><code class="descname">Amp</code><span class="sig-paren">(</span><em>ind</em>, <em>ccdsec</em>, <em>datasec</em>, <em>biassec</em>, <em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.nodes.Amp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="frontloader.nodes.CCD">
+<em class="property">class </em><code class="descclassname">frontloader.nodes.</code><code class="descname">CCD</code><span class="sig-paren">(</span><em>ccdname</em>, <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.nodes.CCD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">list</span></code></p>
+<dl class="method">
+<dt id="frontloader.nodes.CCD.push_amp">
+<code class="descname">push_amp</code><span class="sig-paren">(</span><em>ccdsec</em>, <em>datasec</em>, <em>biassec</em>, <em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.nodes.CCD.push_amp" title="Permalink to this definition">¶</a></dt>
+<dd><p>add an amp to the end of amp list</p>
+<p>For internal use in Exposure only.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="frontloader.nodes.Exposure">
+<em class="property">class </em><code class="descclassname">frontloader.nodes.</code><code class="descname">Exposure</code><span class="sig-paren">(</span><em>metadata</em>, <em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.nodes.Exposure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">dict</span></code></p>
+</dd></dl>
+
 </div>
 
 
@@ -56,6 +95,12 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="frontloader.imgen.html"
+                        title="previous chapter">frontloader.imgen module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="frontloader.repo.html"
+                        title="next chapter">frontloader.repo module</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">

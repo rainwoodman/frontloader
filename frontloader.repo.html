@@ -25,6 +25,9 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="FrontLoader 0.1 documentation" href="index.html" />
+    <link rel="up" title="frontloader package" href="frontloader.html" />
+    <link rel="next" title="frontloader.utils module" href="frontloader.utils.html" />
+    <link rel="prev" title="frontloader.nodes module" href="frontloader.nodes.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -37,7 +40,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="index.html">FrontLoader 0.1 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="frontloader.utils.html" title="frontloader.utils module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="frontloader.nodes.html" title="frontloader.nodes module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">FrontLoader 0.1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >API Reference</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="frontloader.html" accesskey="U">frontloader package</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -46,8 +60,32 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="frontloader-repo-module">
-<h1>frontloader.repo module<a class="headerlink" href="#frontloader-repo-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-frontloader.repo">
+<span id="frontloader-repo-module"></span><h1>frontloader.repo module<a class="headerlink" href="#module-frontloader.repo" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="frontloader.repo.Repository">
+<em class="property">class </em><code class="descclassname">frontloader.repo.</code><code class="descname">Repository</code><span class="sig-paren">(</span><em>prefix</em>, <em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.repo.Repository" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="frontloader.tinydb.database.html#frontloader.tinydb.database.TinyDB" title="frontloader.tinydb.database.TinyDB"><code class="xref py py-class docutils literal"><span class="pre">frontloader.tinydb.database.TinyDB</span></code></a></p>
+<p>An interface to the metadata database created by scanner</p>
+<p>The idea is to support queries for a time range etc.</p>
+<dl class="method">
+<dt id="frontloader.repo.Repository.create_index">
+<code class="descname">create_index</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.repo.Repository.create_index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frontloader.repo.Repository.open">
+<code class="descname">open</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.repo.Repository.open" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="frontloader.repo.Repository.where">
+<code class="descname">where</code><a class="headerlink" href="#frontloader.repo.Repository.where" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">Query</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -56,6 +94,12 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="frontloader.nodes.html"
+                        title="previous chapter">frontloader.nodes module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="frontloader.utils.html"
+                        title="next chapter">frontloader.utils module</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">

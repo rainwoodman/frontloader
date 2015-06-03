@@ -25,6 +25,9 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="FrontLoader 0.1 documentation" href="index.html" />
+    <link rel="up" title="frontloader.tinydb package" href="frontloader.tinydb.html" />
+    <link rel="next" title="frontloader.transforms package" href="frontloader.transforms.html" />
+    <link rel="prev" title="frontloader.tinydb.storages module" href="frontloader.tinydb.storages.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -37,7 +40,19 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="index.html">FrontLoader 0.1 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="frontloader.transforms.html" title="frontloader.transforms package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="frontloader.tinydb.storages.html" title="frontloader.tinydb.storages module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">FrontLoader 0.1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >API Reference</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="frontloader.html" >frontloader package</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="frontloader.tinydb.html" accesskey="U">frontloader.tinydb package</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -46,8 +61,62 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="frontloader-tinydb-utils-module">
-<h1>frontloader.tinydb.utils module<a class="headerlink" href="#frontloader-tinydb-utils-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-frontloader.tinydb.utils">
+<span id="frontloader-tinydb-utils-module"></span><h1>frontloader.tinydb.utils module<a class="headerlink" href="#module-frontloader.tinydb.utils" title="Permalink to this headline">¶</a></h1>
+<p>Utility functions.</p>
+<dl class="class">
+<dt id="frontloader.tinydb.utils.LRUCache">
+<em class="property">class </em><code class="descclassname">frontloader.tinydb.utils.</code><code class="descname">LRUCache</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.utils.LRUCache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">dict</span></code></p>
+<p>A simple LRU cache.</p>
+<dl class="method">
+<dt id="frontloader.tinydb.utils.LRUCache.clear">
+<code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.utils.LRUCache.clear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.utils.LRUCache.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>key</em>, <em>default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.utils.LRUCache.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.utils.LRUCache.refresh">
+<code class="descname">refresh</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.utils.LRUCache.refresh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Push a key to the head of the LRU queue</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="frontloader.tinydb.utils.catch_warning">
+<code class="descclassname">frontloader.tinydb.utils.</code><code class="descname">catch_warning</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.utils.catch_warning" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="frontloader.tinydb.utils.with_metaclass">
+<code class="descclassname">frontloader.tinydb.utils.</code><code class="descname">with_metaclass</code><span class="sig-paren">(</span><em>meta</em>, <em>*bases</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.utils.with_metaclass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function from jinja2/_compat.py. License: BSD.</p>
+<p>Use it like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">BaseForm</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">FormType</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Form</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">FormType</span><span class="p">,</span> <span class="n">BaseForm</span><span class="p">)):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>This requires a bit of explanation: the basic idea is to make a
+dummy metaclass for one level of class instantiation that replaces
+itself with the actual metaclass.  Because of internal type checks
+we also need to make sure that we downgrade the custom metaclass
+for one level to something closer to type (that&#8217;s why __call__ and
+__init__ comes back from type etc.).</p>
+<p>This has the advantage over six.with_metaclass of not introducing
+dummy classes into the final MRO.</p>
+</dd></dl>
+
 </div>
 
 
@@ -56,6 +125,12 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="frontloader.tinydb.storages.html"
+                        title="previous chapter">frontloader.tinydb.storages module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="frontloader.transforms.html"
+                        title="next chapter">frontloader.transforms package</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">

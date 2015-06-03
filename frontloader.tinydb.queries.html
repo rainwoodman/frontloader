@@ -25,6 +25,9 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="FrontLoader 0.1 documentation" href="index.html" />
+    <link rel="up" title="frontloader.tinydb package" href="frontloader.tinydb.html" />
+    <link rel="next" title="frontloader.tinydb.serialize module" href="frontloader.tinydb.serialize.html" />
+    <link rel="prev" title="frontloader.tinydb.operations module" href="frontloader.tinydb.operations.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -37,7 +40,19 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="index.html">FrontLoader 0.1 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="frontloader.tinydb.serialize.html" title="frontloader.tinydb.serialize module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="frontloader.tinydb.operations.html" title="frontloader.tinydb.operations module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">FrontLoader 0.1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >API Reference</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="frontloader.html" >frontloader package</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="frontloader.tinydb.html" accesskey="U">frontloader.tinydb package</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -46,8 +61,190 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="frontloader-tinydb-queries-module">
-<h1>frontloader.tinydb.queries module<a class="headerlink" href="#frontloader-tinydb-queries-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-frontloader.tinydb.queries">
+<span id="frontloader-tinydb-queries-module"></span><h1>frontloader.tinydb.queries module<a class="headerlink" href="#module-frontloader.tinydb.queries" title="Permalink to this headline">¶</a></h1>
+<p>Contains the querying interface.</p>
+<p>Starting with <code class="xref py py-class docutils literal"><span class="pre">Query</span></code> you can construct complex
+queries:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="p">((</span><span class="n">where</span><span class="p">(</span><span class="s">&#39;f1&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">where</span><span class="p">(</span><span class="s">&#39;f2&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">))</span> <span class="o">|</span> <span class="n">where</span><span class="p">(</span><span class="s">&#39;s&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">matches</span><span class="p">(</span><span class="s">r&#39;^\w+$&#39;</span><span class="p">)</span>
+<span class="go">((&#39;f1&#39; == 5) and (&#39;f2&#39; != 2)) or (&#39;s&#39; ~= ^\w+$ )</span>
+</pre></div>
+</div>
+<p>Queries are executed by using the <code class="docutils literal"><span class="pre">__call__</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="n">where</span><span class="p">(</span><span class="s">&#39;val&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span><span class="p">({</span><span class="s">&#39;val&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">})</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span><span class="p">({</span><span class="s">&#39;val&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="frontloader.tinydb.queries.Query">
+<em class="property">class </em><code class="descclassname">frontloader.tinydb.queries.</code><code class="descname">Query</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.queries.Query" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">frontloader.tinydb.queries.AndOrMixin</span></code></p>
+<p>Provides methods to do tests on dict fields.</p>
+<p>Any type of comparison will be called in this class. In addition,
+it is aliased to <code class="xref py py-data docutils literal"><span class="pre">where</span></code> to provide a more intuitive syntax.</p>
+<p>When not using any comparison operation, this simply tests for existence
+of the given key.</p>
+<dl class="method">
+<dt id="frontloader.tinydb.queries.Query.all">
+<code class="descname">all</code><span class="sig-paren">(</span><em>cond</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.queries.Query.all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if a condition is met by any element in a list,
+where a condition can also be a sequence (e.g. list).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">where</span><span class="p">(</span><span class="s">&#39;f1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">where</span><span class="p">(</span><span class="s">&#39;f2&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">&#39;f1&#39; all have &#39;f2&#39; == 1</span>
+</pre></div>
+</div>
+<p>Matches:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;f1&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s">&#39;f2&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="s">&#39;f2&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}]}</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">where</span><span class="p">(</span><span class="s">&#39;f1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">([{</span><span class="s">&#39;f2&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="s">&#39;f3&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}])</span>
+<span class="go">&#39;f1&#39; all have [{&#39;f2&#39;: 1}, {&#39;f3&#39;: 2}]</span>
+</pre></div>
+</div>
+<p>Matches:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;f1&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s">&#39;f2&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="s">&#39;f3&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}]}</span>
+<span class="p">{</span><span class="s">&#39;f1&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s">&#39;f2&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="s">&#39;f3&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="s">&#39;f4&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}]}</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cond</strong> &#8211; The condition to check</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#frontloader.tinydb.queries.Query" title="frontloader.tinydb.queries.Query">tinydb.queries.Query</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.queries.Query.any">
+<code class="descname">any</code><span class="sig-paren">(</span><em>cond</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.queries.Query.any" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if a condition is met by any element in a list,
+where a condition can also be a sequence (e.g. list).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">where</span><span class="p">(</span><span class="s">&#39;f1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">where</span><span class="p">(</span><span class="s">&#39;f2&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">&#39;f1&#39; has any &#39;f2&#39; == 1</span>
+</pre></div>
+</div>
+<p>Matches:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;f1&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s">&#39;f2&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="s">&#39;f2&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}]}</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">where</span><span class="p">(</span><span class="s">&#39;f1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">&#39;f1&#39; has any [1, 2, 3]</span>
+</pre></div>
+</div>
+<p>Matches:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;f1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]}</span>
+<span class="p">{</span><span class="s">&#39;f1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]}</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cond</strong> &#8211; The condition to check</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#frontloader.tinydb.queries.Query" title="frontloader.tinydb.queries.Query">tinydb.queries.Query</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.queries.Query.contains">
+<code class="descname">contains</code><span class="sig-paren">(</span><em>regex</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.queries.Query.contains" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run a regex test against a dict value (only substring has to match).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">where</span><span class="p">(</span><span class="s">&#39;f1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s">r&#39;\d+&#39;</span><span class="p">)</span>
+<span class="go">&#39;f1&#39; ~= \d+</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>regex</strong> &#8211; The regular expression to pass to <code class="docutils literal"><span class="pre">re.search</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">QueryRegex</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.queries.Query.has">
+<code class="descname">has</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.queries.Query.has" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run test on a nested dict.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">where</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="s">&#39;y&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+<span class="go">has &#39;x&#39; =&gt; (&#39;y&#39; == 2)</span>
+</pre></div>
+</div>
+<p>Matches:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;x&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;y&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}}</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>key</strong> &#8211; the key to search for in the nested dict</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">QueryHas</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.queries.Query.matches">
+<code class="descname">matches</code><span class="sig-paren">(</span><em>regex</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.queries.Query.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run a regex test against a dict value (whole string has to match).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">where</span><span class="p">(</span><span class="s">&#39;f1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">matches</span><span class="p">(</span><span class="s">r&#39;^\w+$&#39;</span><span class="p">)</span>
+<span class="go">&#39;f1&#39; ~= ^\w+$</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>regex</strong> &#8211; The regular expression to pass to <code class="docutils literal"><span class="pre">re.match</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">QueryRegex</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.queries.Query.test">
+<code class="descname">test</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.queries.Query.test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run a user-defined test function against a dict value.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">test_func</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">val</span> <span class="o">==</span> <span class="mi">42</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">where</span><span class="p">(</span><span class="s">&#39;f1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">test_func</span><span class="p">)</span>
+<span class="go">&#39;f1&#39;.test(&lt;function test_func at 0xXXXXXXXX&gt;)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>func</strong> &#8211; The function to run. Has to accept one parameter and
+return a boolean.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">QueryCustom</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -56,6 +253,12 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="frontloader.tinydb.operations.html"
+                        title="previous chapter">frontloader.tinydb.operations module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="frontloader.tinydb.serialize.html"
+                        title="next chapter">frontloader.tinydb.serialize module</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">

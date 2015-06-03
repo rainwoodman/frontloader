@@ -25,6 +25,9 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="FrontLoader 0.1 documentation" href="index.html" />
+    <link rel="up" title="frontloader.tinydb package" href="frontloader.tinydb.html" />
+    <link rel="next" title="frontloader.tinydb.index module" href="frontloader.tinydb.index.html" />
+    <link rel="prev" title="frontloader.tinydb package" href="frontloader.tinydb.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -37,7 +40,19 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="index.html">FrontLoader 0.1 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="frontloader.tinydb.index.html" title="frontloader.tinydb.index module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="frontloader.tinydb.html" title="frontloader.tinydb package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">FrontLoader 0.1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >API Reference</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="frontloader.html" >frontloader package</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="frontloader.tinydb.html" accesskey="U">frontloader.tinydb package</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -46,8 +61,331 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="frontloader-tinydb-database-module">
-<h1>frontloader.tinydb.database module<a class="headerlink" href="#frontloader-tinydb-database-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-frontloader.tinydb.database">
+<span id="frontloader-tinydb-database-module"></span><h1>frontloader.tinydb.database module<a class="headerlink" href="#module-frontloader.tinydb.database" title="Permalink to this headline">¶</a></h1>
+<p>Contains the <code class="xref py py-class docutils literal"><span class="pre">database</span></code> and
+<code class="xref py py-class docutils literal"><span class="pre">tables</span></code> implementation.</p>
+<dl class="class">
+<dt id="frontloader.tinydb.database.Element">
+<em class="property">class </em><code class="descclassname">frontloader.tinydb.database.</code><code class="descname">Element</code><span class="sig-paren">(</span><em>value=None</em>, <em>eid=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.Element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">dict</span></code></p>
+<p>Represents an element stored in the database.</p>
+<p>This is a transparent proxy for database elements. It exists
+to provide a way to access an element&#8217;s id via <code class="docutils literal"><span class="pre">el.eid</span></code>.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="frontloader.tinydb.database.SmartCacheTable">
+<em class="property">class </em><code class="descclassname">frontloader.tinydb.database.</code><code class="descname">SmartCacheTable</code><span class="sig-paren">(</span><em>name</em>, <em>db</em>, <em>cache_size=10</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.SmartCacheTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#frontloader.tinydb.database.Table" title="frontloader.tinydb.database.Table"><code class="xref py py-class docutils literal"><span class="pre">frontloader.tinydb.database.Table</span></code></a></p>
+<p>A Table with a smarter query cache.</p>
+<p>Provides the same methods as <code class="xref py py-class docutils literal"><span class="pre">Table</span></code>.</p>
+<p>The query cache gets updated on insert/update/remove. Useful when in cases
+where many searches are done but data isn&#8217;t changed often.</p>
+<dl class="method">
+<dt id="frontloader.tinydb.database.SmartCacheTable.insert">
+<code class="descname">insert</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.SmartCacheTable.insert" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.database.SmartCacheTable.insert_multiple">
+<code class="descname">insert_multiple</code><span class="sig-paren">(</span><em>elements</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.SmartCacheTable.insert_multiple" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.database.SmartCacheTable.purge">
+<code class="descname">purge</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.SmartCacheTable.purge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.database.SmartCacheTable.remove">
+<code class="descname">remove</code><span class="sig-paren">(</span><em>cond=None</em>, <em>eids=None</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.SmartCacheTable.remove" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.database.SmartCacheTable.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>fields</em>, <em>cond=None</em>, <em>eids=None</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.SmartCacheTable.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="frontloader.tinydb.database.Table">
+<em class="property">class </em><code class="descclassname">frontloader.tinydb.database.</code><code class="descname">Table</code><span class="sig-paren">(</span><em>name</em>, <em>db</em>, <em>cache_size=10</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.Table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Represents a single TinyDB Table.</p>
+<dl class="method">
+<dt id="frontloader.tinydb.database.Table.all">
+<code class="descname">all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.Table.all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all elements stored in the table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a list with all elements.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list[Element]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.database.Table.close">
+<code class="descname">close</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.Table.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try to close the storage after being used as a context manager.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.database.Table.contains">
+<code class="descname">contains</code><span class="sig-paren">(</span><em>cond=None</em>, <em>eids=None</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.Table.contains" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check wether the database contains an element matching a condition or
+an ID.</p>
+<p>If <code class="docutils literal"><span class="pre">eids</span></code> is set, it checks if the db contains an element with one
+of the specified.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cond</strong> (<a class="reference internal" href="frontloader.tinydb.queries.html#frontloader.tinydb.queries.Query" title="frontloader.tinydb.queries.Query"><em>Query</em></a>) &#8211; the condition use</li>
+<li><strong>eids</strong> &#8211; the element IDs to look for</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.database.Table.count">
+<code class="descname">count</code><span class="sig-paren">(</span><em>cond</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.Table.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count the elements matching a condition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cond</strong> (<a class="reference internal" href="frontloader.tinydb.queries.html#frontloader.tinydb.queries.Query" title="frontloader.tinydb.queries.Query"><em>Query</em></a>) &#8211; the condition use</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.database.Table.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>cond=None</em>, <em>eid=None</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.Table.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get exactly one element specified by a query or and ID.</p>
+<p>Returns <code class="docutils literal"><span class="pre">None</span></code> if the element doesn&#8217;t exist</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>cond</strong> (<a class="reference internal" href="frontloader.tinydb.queries.html#frontloader.tinydb.queries.Query" title="frontloader.tinydb.queries.Query"><em>Query</em></a>) &#8211; the condition to check against</li>
+<li><strong>eid</strong> &#8211; the element&#8217;s ID</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the element or None</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Element | None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.database.Table.insert">
+<code class="descname">insert</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.Table.insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert a new element into the table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>element</strong> &#8211; the element to insert</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the inserted element&#8217;s ID</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.database.Table.insert_multiple">
+<code class="descname">insert_multiple</code><span class="sig-paren">(</span><em>elements</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.Table.insert_multiple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert multiple elements into the table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>elements</strong> &#8211; a list of elements to insert</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a list containing the inserted elements&#8217; IDs</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.database.Table.process_elements">
+<code class="descname">process_elements</code><span class="sig-paren">(</span><em>func</em>, <em>cond=None</em>, <em>eids=None</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.Table.process_elements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function for processing all elements specified by condition
+or IDs.</p>
+<p>A repeating pattern in TinyDB is to run some code on all elements
+that match a condition or are specified by their ID. This is
+implemented in this function.
+The function passed as <code class="docutils literal"><span class="pre">func</span></code> has to be a callable. It&#8217;s first
+argument will be the data currently in the database. It&#8217;s second
+argument is the element ID of the currently processed element.</p>
+<p>See: <a class="reference internal" href="#frontloader.tinydb.database.Table.update" title="frontloader.tinydb.database.Table.update"><code class="xref py py-meth docutils literal"><span class="pre">update()</span></code></a>, <a class="reference internal" href="#frontloader.tinydb.database.Table.remove" title="frontloader.tinydb.database.Table.remove"><code class="xref py py-meth docutils literal"><span class="pre">remove()</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>func</strong> &#8211; the function to execute on every included element.
+first argument: all data
+second argument: the current eid</li>
+<li><strong>cond</strong> &#8211; elements to use</li>
+<li><strong>eids</strong> &#8211; elements to use</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.database.Table.purge">
+<code class="descname">purge</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.Table.purge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Purge the table by removing all elements.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.database.Table.remove">
+<code class="descname">remove</code><span class="sig-paren">(</span><em>cond=None</em>, <em>eids=None</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.Table.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove all matching elements.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cond</strong> (<em>query</em>) &#8211; the condition to check against</li>
+<li><strong>eids</strong> (<em>list</em>) &#8211; a list of element IDs</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.database.Table.search">
+<code class="descname">search</code><span class="sig-paren">(</span><em>cond</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.Table.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for all elements matching a &#8216;where&#8217; cond.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cond</strong> (<a class="reference internal" href="frontloader.tinydb.queries.html#frontloader.tinydb.queries.Query" title="frontloader.tinydb.queries.Query"><em>Query</em></a>) &#8211; the condition to check against</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of matching elements</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list[Element]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.database.Table.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>fields</em>, <em>cond=None</em>, <em>eids=None</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.Table.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update all matching elements to have a given set of fields.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fields</strong> (<em>dict | (dict, int) -&gt; None</em>) &#8211; the fields that the matching elements will have
+or a method that will update the elements</li>
+<li><strong>cond</strong> (<em>query</em>) &#8211; which elements to update</li>
+<li><strong>eids</strong> (<em>list</em>) &#8211; a list of element IDs</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="frontloader.tinydb.database.TinyDB">
+<em class="property">class </em><code class="descclassname">frontloader.tinydb.database.</code><code class="descname">TinyDB</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.TinyDB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>The main class of TinyDB.</p>
+<p>Gives access to the database, provides methods to insert/search/remove
+and getting tables.</p>
+<dl class="attribute">
+<dt id="frontloader.tinydb.database.TinyDB.DEFAULT_STORAGE">
+<code class="descname">DEFAULT_STORAGE</code><a class="headerlink" href="#frontloader.tinydb.database.TinyDB.DEFAULT_STORAGE" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">JSONStorage</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.database.TinyDB.purge_tables">
+<code class="descname">purge_tables</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.TinyDB.purge_tables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Purge all tables from the database. <strong>CANNOT BE REVERSED!</strong></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.database.TinyDB.table">
+<code class="descname">table</code><span class="sig-paren">(</span><em>name='_default'</em>, <em>smart_cache=False</em>, <em>**options</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.TinyDB.table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get access to a specific table.</p>
+<p>Creates a new table, if it hasn&#8217;t been created before, otherwise it
+returns the cached <code class="xref py py-class docutils literal"><span class="pre">Table</span></code> object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; The name of the table.</li>
+<li><strong>smart_cache</strong> &#8211; Use a smarter query caching.
+See <code class="xref py py-class docutils literal"><span class="pre">tinydb.database.SmartCacheTable</span></code></li>
+<li><strong>cache_size</strong> &#8211; How many query results to cache.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="frontloader.tinydb.database.TinyDB.table_class">
+<code class="descname">table_class</code><a class="headerlink" href="#frontloader.tinydb.database.TinyDB.table_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#frontloader.tinydb.database.Table" title="frontloader.tinydb.database.Table"><code class="xref py py-class docutils literal"><span class="pre">Table</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.database.TinyDB.tables">
+<code class="descname">tables</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.database.TinyDB.tables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the names of all tables in the database.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a set of table names</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">set[str]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -56,6 +394,12 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="frontloader.tinydb.html"
+                        title="previous chapter">frontloader.tinydb package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="frontloader.tinydb.index.html"
+                        title="next chapter">frontloader.tinydb.index module</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">

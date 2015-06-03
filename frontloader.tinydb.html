@@ -25,6 +25,9 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="FrontLoader 0.1 documentation" href="index.html" />
+    <link rel="up" title="frontloader package" href="frontloader.html" />
+    <link rel="next" title="frontloader.tinydb.database module" href="frontloader.tinydb.database.html" />
+    <link rel="prev" title="frontloader.hduparsers.decam module" href="frontloader.hduparsers.decam.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -37,7 +40,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="index.html">FrontLoader 0.1 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="frontloader.tinydb.database.html" title="frontloader.tinydb.database module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="frontloader.hduparsers.decam.html" title="frontloader.hduparsers.decam module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">FrontLoader 0.1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >API Reference</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="frontloader.html" accesskey="U">frontloader package</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -46,8 +60,166 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="frontloader-tinydb-package">
-<h1>frontloader.tinydb package<a class="headerlink" href="#frontloader-tinydb-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-frontloader.tinydb">
+<span id="frontloader-tinydb-package"></span><h1>frontloader.tinydb package<a class="headerlink" href="#module-frontloader.tinydb" title="Permalink to this headline">¶</a></h1>
+<p>TinyDB is a tiny, document oriented database optimized for your happiness :)</p>
+<p>TinyDB stores differrent types of python data types using a configurable
+backend. It has support for handy querying and tables.</p>
+<p>Usage example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tinydb</span> <span class="kn">import</span> <span class="n">TinyDB</span><span class="p">,</span> <span class="n">where</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tinydb.storages</span> <span class="kn">import</span> <span class="n">MemoryStorage</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span> <span class="o">=</span> <span class="n">TinyDB</span><span class="p">(</span><span class="n">storage</span><span class="o">=</span><span class="n">MemoryStorage</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">insert</span><span class="p">({</span><span class="s">&#39;data&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">})</span>  <span class="c"># Insert into &#39;_default&#39; table</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">where</span><span class="p">(</span><span class="s">&#39;data&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">[{&#39;data&#39;: 5, &#39;_id&#39;: 1}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Now let&#39;s create a new table</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s">&#39;our_table&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">tbl</span><span class="o">.</span><span class="n">insert</span><span class="p">({</span><span class="s">&#39;data&#39;</span><span class="p">:</span> <span class="n">i</span><span class="p">})</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">tbl</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">where</span><span class="p">(</span><span class="s">&#39;data&#39;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">))</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="frontloader.tinydb.TinyDB">
+<em class="property">class </em><code class="descclassname">frontloader.tinydb.</code><code class="descname">TinyDB</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.TinyDB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>The main class of TinyDB.</p>
+<p>Gives access to the database, provides methods to insert/search/remove
+and getting tables.</p>
+<dl class="attribute">
+<dt id="frontloader.tinydb.TinyDB.DEFAULT_STORAGE">
+<code class="descname">DEFAULT_STORAGE</code><a class="headerlink" href="#frontloader.tinydb.TinyDB.DEFAULT_STORAGE" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#frontloader.tinydb.JSONStorage" title="frontloader.tinydb.JSONStorage"><code class="xref py py-class docutils literal"><span class="pre">JSONStorage</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.TinyDB.purge_tables">
+<code class="descname">purge_tables</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.TinyDB.purge_tables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Purge all tables from the database. <strong>CANNOT BE REVERSED!</strong></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.TinyDB.table">
+<code class="descname">table</code><span class="sig-paren">(</span><em>name='_default'</em>, <em>smart_cache=False</em>, <em>**options</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.TinyDB.table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get access to a specific table.</p>
+<p>Creates a new table, if it hasn&#8217;t been created before, otherwise it
+returns the cached <code class="xref py py-class docutils literal"><span class="pre">Table</span></code> object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; The name of the table.</li>
+<li><strong>smart_cache</strong> &#8211; Use a smarter query caching.
+See <code class="xref py py-class docutils literal"><span class="pre">tinydb.database.SmartCacheTable</span></code></li>
+<li><strong>cache_size</strong> &#8211; How many query results to cache.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="frontloader.tinydb.TinyDB.table_class">
+<code class="descname">table_class</code><a class="headerlink" href="#frontloader.tinydb.TinyDB.table_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">Table</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.TinyDB.tables">
+<code class="descname">tables</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.TinyDB.tables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the names of all tables in the database.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a set of table names</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">set[str]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="frontloader.tinydb.Storage">
+<em class="property">class </em><code class="descclassname">frontloader.tinydb.</code><code class="descname">Storage</code><a class="headerlink" href="#frontloader.tinydb.Storage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>The abstract base class for all Storages.</p>
+<p>A Storage (de)serializes the current state of the database and stores it in
+some place (memory, file on disk, ...).</p>
+<dl class="method">
+<dt id="frontloader.tinydb.Storage.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.Storage.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional: Close open file handles, etc.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.Storage.read">
+<code class="descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.Storage.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the last stored state.</p>
+<p>Any kind of deserialization should go here.
+Raise <code class="docutils literal"><span class="pre">ValueError</span></code> here to indicate that the storage is empty.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.Storage.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.Storage.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write the current state of the database to the storage.</p>
+<p>Any kind of serialization should go here.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>dict</em>) &#8211; The current state of the database.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="frontloader.tinydb.JSONStorage">
+<em class="property">class </em><code class="descclassname">frontloader.tinydb.</code><code class="descname">JSONStorage</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.JSONStorage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="frontloader.tinydb.storages.html#frontloader.tinydb.storages.Storage" title="frontloader.tinydb.storages.Storage"><code class="xref py py-class docutils literal"><span class="pre">frontloader.tinydb.storages.Storage</span></code></a></p>
+<p>Store the data in a JSON file.</p>
+<dl class="method">
+<dt id="frontloader.tinydb.JSONStorage.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.JSONStorage.close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.JSONStorage.read">
+<code class="descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.JSONStorage.read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.JSONStorage.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.JSONStorage.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="frontloader.tinydb.where">
+<code class="descclassname">frontloader.tinydb.</code><code class="descname">where</code><a class="headerlink" href="#frontloader.tinydb.where" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal"><span class="pre">Query</span></code></p>
+</dd></dl>
+
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
@@ -81,6 +253,12 @@
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="frontloader.hduparsers.decam.html"
+                        title="previous chapter">frontloader.hduparsers.decam module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="frontloader.tinydb.database.html"
+                        title="next chapter">frontloader.tinydb.database module</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">

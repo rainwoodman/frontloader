@@ -25,6 +25,9 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="FrontLoader 0.1 documentation" href="index.html" />
+    <link rel="up" title="frontloader.tinydb package" href="frontloader.tinydb.html" />
+    <link rel="next" title="frontloader.tinydb.migrate module" href="frontloader.tinydb.migrate.html" />
+    <link rel="prev" title="frontloader.tinydb.index module" href="frontloader.tinydb.index.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -37,7 +40,19 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="index.html">FrontLoader 0.1 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="frontloader.tinydb.migrate.html" title="frontloader.tinydb.migrate module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="frontloader.tinydb.index.html" title="frontloader.tinydb.index module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">FrontLoader 0.1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >API Reference</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="frontloader.html" >frontloader package</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="frontloader.tinydb.html" accesskey="U">frontloader.tinydb package</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -46,8 +61,98 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="frontloader-tinydb-middlewares-module">
-<h1>frontloader.tinydb.middlewares module<a class="headerlink" href="#frontloader-tinydb-middlewares-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-frontloader.tinydb.middlewares">
+<span id="frontloader-tinydb-middlewares-module"></span><h1>frontloader.tinydb.middlewares module<a class="headerlink" href="#module-frontloader.tinydb.middlewares" title="Permalink to this headline">¶</a></h1>
+<p>Contains the <code class="xref py py-class docutils literal"><span class="pre">base</span> <span class="pre">class</span></code> for
+middlewares and implementations.</p>
+<dl class="class">
+<dt id="frontloader.tinydb.middlewares.CachingMiddleware">
+<em class="property">class </em><code class="descclassname">frontloader.tinydb.middlewares.</code><code class="descname">CachingMiddleware</code><span class="sig-paren">(</span><em>storage_cls=&lt;class 'frontloader.tinydb.storages.JSONStorage'&gt;</em>, <em>write_cache_size=1000</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.middlewares.CachingMiddleware" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#frontloader.tinydb.middlewares.Middleware" title="frontloader.tinydb.middlewares.Middleware"><code class="xref py py-class docutils literal"><span class="pre">frontloader.tinydb.middlewares.Middleware</span></code></a></p>
+<p>Add some caching to TinyDB.</p>
+<p>This Middleware aims to improve the performance of TinyDB by writing only
+the last DB state every <code class="xref py py-attr docutils literal"><span class="pre">write_cache_size</span></code> time and reading always
+from cache.</p>
+<dl class="method">
+<dt id="frontloader.tinydb.middlewares.CachingMiddleware.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.middlewares.CachingMiddleware.close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.middlewares.CachingMiddleware.flush">
+<code class="descname">flush</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.middlewares.CachingMiddleware.flush" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flush all unwritten data to disk.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.middlewares.CachingMiddleware.read">
+<code class="descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.middlewares.CachingMiddleware.read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.middlewares.CachingMiddleware.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.middlewares.CachingMiddleware.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="frontloader.tinydb.middlewares.Middleware">
+<em class="property">class </em><code class="descclassname">frontloader.tinydb.middlewares.</code><code class="descname">Middleware</code><span class="sig-paren">(</span><em>storage_cls=&lt;class 'frontloader.tinydb.storages.JSONStorage'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.middlewares.Middleware" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>The base class for all Middlewares.</p>
+<p>Middlewares hook into the read/write process of TinyDB allowing you to
+extend the behaviour by adding caching, logging, ...</p>
+<p>Your middleware&#8217;s <code class="docutils literal"><span class="pre">__init__</span></code> method has to accept exactly one
+argument which is the class of the &#8220;real&#8221; storage. It has to be stored as
+<code class="docutils literal"><span class="pre">_storage_cls</span></code> (see <code class="xref py py-class docutils literal"><span class="pre">CachingMiddleware</span></code> for an
+example).</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="frontloader.tinydb.middlewares.SerializationMiddleware">
+<em class="property">class </em><code class="descclassname">frontloader.tinydb.middlewares.</code><code class="descname">SerializationMiddleware</code><span class="sig-paren">(</span><em>storage_cls=&lt;class 'frontloader.tinydb.storages.JSONStorage'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.middlewares.SerializationMiddleware" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#frontloader.tinydb.middlewares.Middleware" title="frontloader.tinydb.middlewares.Middleware"><code class="xref py py-class docutils literal"><span class="pre">frontloader.tinydb.middlewares.Middleware</span></code></a></p>
+<p>Provide custom serialization for TinyDB.</p>
+<p>This middleware allows users of TinyDB to register custom serializations.
+The serialized data will be passed to the wrapped storage and data that
+is read from the storage will be deserialized.</p>
+<dl class="method">
+<dt id="frontloader.tinydb.middlewares.SerializationMiddleware.read">
+<code class="descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.middlewares.SerializationMiddleware.read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.middlewares.SerializationMiddleware.register_serializer">
+<code class="descname">register_serializer</code><span class="sig-paren">(</span><em>serializer</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.middlewares.SerializationMiddleware.register_serializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register a new Serializer.</p>
+<p>When reading from/writing to the underlying storage, TinyDB
+will run all objects through the list of registered serializers
+allowing each one to handle objects it recognizes.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The name has to be unique among this database instance.
+Re-using the same name will overwrite the old serializer.
+Also, registering a serializer will be reflected in all
+tables when reading/writing them.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>serializer</strong> (<a class="reference internal" href="frontloader.tinydb.serialize.html#frontloader.tinydb.serialize.Serializer" title="frontloader.tinydb.serialize.Serializer"><em>tinydb.serialize.Serializer</em></a>) &#8211; an instance of the serializer</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.middlewares.SerializationMiddleware.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.middlewares.SerializationMiddleware.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -56,6 +161,12 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="frontloader.tinydb.index.html"
+                        title="previous chapter">frontloader.tinydb.index module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="frontloader.tinydb.migrate.html"
+                        title="next chapter">frontloader.tinydb.migrate module</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">

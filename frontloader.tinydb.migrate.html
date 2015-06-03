@@ -25,6 +25,9 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="FrontLoader 0.1 documentation" href="index.html" />
+    <link rel="up" title="frontloader.tinydb package" href="frontloader.tinydb.html" />
+    <link rel="next" title="frontloader.tinydb.npindex module" href="frontloader.tinydb.npindex.html" />
+    <link rel="prev" title="frontloader.tinydb.middlewares module" href="frontloader.tinydb.middlewares.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -37,7 +40,19 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="index.html">FrontLoader 0.1 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="frontloader.tinydb.npindex.html" title="frontloader.tinydb.npindex module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="frontloader.tinydb.middlewares.html" title="frontloader.tinydb.middlewares module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">FrontLoader 0.1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >API Reference</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="frontloader.html" >frontloader package</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="frontloader.tinydb.html" accesskey="U">frontloader.tinydb package</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -46,8 +61,40 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="frontloader-tinydb-migrate-module">
-<h1>frontloader.tinydb.migrate module<a class="headerlink" href="#frontloader-tinydb-migrate-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-frontloader.tinydb.migrate">
+<span id="frontloader-tinydb-migrate-module"></span><h1>frontloader.tinydb.migrate module<a class="headerlink" href="#module-frontloader.tinydb.migrate" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="frontloader.tinydb.migrate.main">
+<code class="descclassname">frontloader.tinydb.migrate.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.migrate.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="frontloader.tinydb.migrate.migrate">
+<code class="descclassname">frontloader.tinydb.migrate.</code><code class="descname">migrate</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.migrate.migrate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Migrate a database to the scheme used in v2.0.</p>
+<p>To migrate a db that uses a custom storage, use</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tinydb.migrate</span> <span class="kn">import</span> <span class="n">migrate</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="o">...</span><span class="p">]</span>  <span class="c"># args for your storage class</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="o">...</span><span class="p">}</span>  <span class="c"># kwargs for your storage class</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">migrate</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">storage</span><span class="o">=</span><span class="n">YourStorageClass</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>storage</strong> &#8211; The class of the storage to use. Will be initialized
+with <code class="docutils literal"><span class="pre">args</span></code> and <code class="docutils literal"><span class="pre">kwargs</span></code>. Default:
+<code class="xref py py-class docutils literal"><span class="pre">JSONStorage</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><code class="docutils literal"><span class="pre">True</span></code> if the db has been migrated, <code class="docutils literal"><span class="pre">False</span></code> if the db
+didn&#8217;t need a migration.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 
 
@@ -56,6 +103,12 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="frontloader.tinydb.middlewares.html"
+                        title="previous chapter">frontloader.tinydb.middlewares module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="frontloader.tinydb.npindex.html"
+                        title="next chapter">frontloader.tinydb.npindex module</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">

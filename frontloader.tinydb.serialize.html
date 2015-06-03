@@ -25,6 +25,9 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="FrontLoader 0.1 documentation" href="index.html" />
+    <link rel="up" title="frontloader.tinydb package" href="frontloader.tinydb.html" />
+    <link rel="next" title="frontloader.tinydb.storages module" href="frontloader.tinydb.storages.html" />
+    <link rel="prev" title="frontloader.tinydb.queries module" href="frontloader.tinydb.queries.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -37,7 +40,19 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="index.html">FrontLoader 0.1 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="frontloader.tinydb.storages.html" title="frontloader.tinydb.storages module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="frontloader.tinydb.queries.html" title="frontloader.tinydb.queries module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">FrontLoader 0.1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >API Reference</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="frontloader.html" >frontloader package</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="frontloader.tinydb.html" accesskey="U">frontloader.tinydb package</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -46,8 +61,57 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="frontloader-tinydb-serialize-module">
-<h1>frontloader.tinydb.serialize module<a class="headerlink" href="#frontloader-tinydb-serialize-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-frontloader.tinydb.serialize">
+<span id="frontloader-tinydb-serialize-module"></span><h1>frontloader.tinydb.serialize module<a class="headerlink" href="#module-frontloader.tinydb.serialize" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="frontloader.tinydb.serialize.Serializer">
+<em class="property">class </em><code class="descclassname">frontloader.tinydb.serialize.</code><code class="descname">Serializer</code><a class="headerlink" href="#frontloader.tinydb.serialize.Serializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>The abstract base class for Serializers.</p>
+<p>Allows TinyDB to handle arbitrary objects by running them through a list
+of registerd serializers.</p>
+<p>Every serializer has to tell which class it can handle.</p>
+<dl class="attribute">
+<dt id="frontloader.tinydb.serialize.Serializer.OBJ_CLASS">
+<code class="descname">OBJ_CLASS</code><a class="headerlink" href="#frontloader.tinydb.serialize.Serializer.OBJ_CLASS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.serialize.Serializer.decode">
+<code class="descname">decode</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.serialize.Serializer.decode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decode an object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> (<em>str</em>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="frontloader.tinydb.serialize.Serializer.encode">
+<code class="descname">encode</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#frontloader.tinydb.serialize.Serializer.encode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encode an object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -56,6 +120,12 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="frontloader.tinydb.queries.html"
+                        title="previous chapter">frontloader.tinydb.queries module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="frontloader.tinydb.storages.html"
+                        title="next chapter">frontloader.tinydb.storages module</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
