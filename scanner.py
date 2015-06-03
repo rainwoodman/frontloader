@@ -37,13 +37,14 @@ def scan(filename):
         d['RA'] = header['RA']
         d['DEC'] = header['DEC']
         d['FLAVOR'] = 'object'
+        d['AIRMASS'] = header['AIRMASS']
     return d
 
 def main():
     filenames = sorted(list(glob(os.path.join(ns.prefix, '*/*.fits.gz'))))
     with Repository(ns.prefix, ns.output) as db:
-
         for filename in filenames:
+            print filename
             d = scan(filename)
             db.remove(Repository.where("PK") == d["PK"])
             db.insert(d)
