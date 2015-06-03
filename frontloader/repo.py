@@ -14,7 +14,7 @@ class Repository(TinyDB):
         The idea is to support queries for a time range etc. 
     """
     def __init__(self, prefix, filename):
-        TinyDB.__init__(self, filename, storage=CachingMiddleware(JSONPrettyStorage))
+        TinyDB.__init__(self, filename, storage=CachingMiddleware(JSONPrettyStorage, write_cache_size=20))
         self.prefix = prefix
     def create_index(self, key):
         return Index(self, key)

@@ -81,7 +81,6 @@ def main():
             else:
                 print PK, 'inserting', d
                 repo.insert(d)
-            repo._storage.flush()
 
         pool.map(work, filenames, reduce=reduce)
 
