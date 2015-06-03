@@ -50,7 +50,7 @@ def scan(filename):
             d['FLAVOR'] = 'object'
             d['AIRMASS'] = header['AIRMASS']
     except Exception as e:
-        d['OBJECT'] = 'failure'
+        d['FLAVOR'] = 'failure'
         d['EXCEPTION'] = str(e)
     return d
 
@@ -76,11 +76,12 @@ def main():
             if d is None: return
             PK = d['PK']
             if update:
-                repo.update(d, eids=PKindex.get_eids([PK]))
+                assert repo.get(eid=PKindex.get_eids([PK])[0])['PK'] == PK
+                repo.remove(eids=PKindex.get_eids([PK]))
                 print PK, 'exists', 'updating', d
             else:
                 print PK, 'inserting', d
-                repo.insert(d)
+            repo.insert(d)
 
         pool.map(work, filenames, reduce=reduce)
 
