@@ -11,6 +11,7 @@ import fitsio
 from frontloader import Repository
 
 ap = ArgumentParser()
+ap.add_argument("--force", help="Replace all entries", action='store_true', default=False)
 ap.add_argument("prefix", help="Location to scan the image files")
 ap.add_argument("output", help="Location to store the database")
 
@@ -42,13 +43,21 @@ def scan(filename):
 
 def main():
     filenames = sorted(list(glob(os.path.join(ns.prefix, '*/*.fits.gz'))))
-    with Repository(ns.prefix, ns.output) as db:
-        for filename in filenames:
-            print filename
+    repo = Repository(ns.prefix, ns.output)
+    for filename in filenames:
+        PK = os.path.basename(filename)
+        print filename, PK,
+        if len(repo.search(repo.where('PK') == PK)) > 0:
+            print 'exists'
+            if not ns.force:
+                continue
+        try:
             d = scan(filename)
-            db.remove(Repository.where("PK") == d["PK"])
-            db.insert(d)
-
+        except Exception as e:
+            print 'failed', e
+            repo.remove(repo.where("PK") == d["PK"])
+            repo.insert(d)
+#            repo.flush()
 
 if __name__ == "__main__":
     main()
