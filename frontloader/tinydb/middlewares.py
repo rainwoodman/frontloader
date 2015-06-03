@@ -79,16 +79,16 @@ class CachingMiddleware(Middleware):
     Add some caching to TinyDB.
 
     This Middleware aims to improve the performance of TinyDB by writing only
-    the last DB state every :attr:`WRITE_CACHE_SIZE` time and reading always
+    the last DB state every :attr:`write_cache_size` time and reading always
     from cache.
     """
 
     #: The number of write operations to cache before writing to disc
-    WRITE_CACHE_SIZE = 1000
 
-    def __init__(self, storage_cls=TinyDB.DEFAULT_STORAGE):
+    def __init__(self, storage_cls=TinyDB.DEFAULT_STORAGE, write_cache_size=1000):
         super(CachingMiddleware, self).__init__(storage_cls)
 
+        self.write_cache_size = write_cache_size
         self.cache = None
         self._cache_modified_count = 0
 
@@ -104,7 +104,7 @@ class CachingMiddleware(Middleware):
         self.cache = data
         self._cache_modified_count += 1
 
-        if self._cache_modified_count >= self.WRITE_CACHE_SIZE:
+        if self._cache_modified_count >= self.write_cache_size:
             self.flush()
 
     def flush(self):
