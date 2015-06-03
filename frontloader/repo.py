@@ -1,6 +1,6 @@
 from .tinydb import TinyDB
 from .tinydb import where
-from .tinydb.storages import JSONStorage
+from .tinydb.storages import JSONPrettyStorage
 from .tinydb.middlewares import CachingMiddleware
 from .tinydb.index import Index
 from .nodes import Exposure
@@ -14,7 +14,7 @@ class Repository(TinyDB):
         The idea is to support queries for a time range etc. 
     """
     def __init__(self, prefix, filename):
-        TinyDB.__init__(self, filename, storage=CachingMiddleware(JSONStorage))
+        TinyDB.__init__(self, filename, storage=CachingMiddleware(JSONPrettyStorage))
         self.prefix = prefix
         self.index_by_date_obs = Index(self, 'DATE-OBS')
 
